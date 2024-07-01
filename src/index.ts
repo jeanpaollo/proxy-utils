@@ -1,1 +1,1 @@
-export * from "./proxy.util";
+export * from "./barrel";

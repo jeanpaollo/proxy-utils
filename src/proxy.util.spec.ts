@@ -1,14 +1,14 @@
-import { ProxyUtils } from "./proxy.util";
+import { bindMethods, getFirstProperty, withGetters } from "./barrel";
 
 describe("Test of ProxyUtils", () => {
-  describe("with 'scopeMethods' from Array", () => {
+  describe("with 'bindMethods' from Array", () => {
     const arrayInitialValue = [10, 20, 30];
     let array: Array<number>;
     let arrayProxy: typeof array;
 
     beforeEach(() => {
       array = Array.from(arrayInitialValue);
-      arrayProxy = ProxyUtils.scopeMethods(array);
+      arrayProxy = bindMethods(array);
     });
 
     for (let x = 0; x < arrayInitialValue.length; x++) {
@@ -51,13 +51,11 @@ describe("Test of ProxyUtils", () => {
   describe("with 'withGetters' from {}", () => {
     const objectInitialValue = { a: 1, b: 2, c: 3 };
     let object: typeof objectInitialValue;
-    let objectProxy: ReturnType<
-      typeof ProxyUtils.withGetters<typeof objectInitialValue>
-    >;
+    let objectProxy: ReturnType<typeof withGetters<typeof objectInitialValue>>;
 
     beforeEach(() => {
       object = { ...objectInitialValue };
-      objectProxy = ProxyUtils.withGetters(object);
+      objectProxy = withGetters(object);
     });
 
     it("invoke all methods from object", () => {
@@ -70,6 +68,34 @@ describe("Test of ProxyUtils", () => {
           objectProxy[key as keyof typeof objectProxy]
         );
       }
+    });
+  });
+
+  describe(`with 'getFirstProperty'`, () => {
+    const firstObject = {
+      a: 1,
+      b: 2,
+      c: 3,
+    };
+
+    const secondObject = {
+      a: 2,
+      c: 4,
+    };
+
+    const thirdObject = {
+      d: 5,
+      e: 6,
+    };
+
+    const result = getFirstProperty(thirdObject, secondObject, firstObject);
+
+    it("invoke three objects", () => {
+      expect(result.e).toEqual(thirdObject.e);
+      expect(result.d).toEqual(thirdObject.d);
+      expect(result.c).toEqual(secondObject.c);
+      expect(result.b).toEqual(firstObject.b);
+      expect(result.a).toEqual(secondObject.a);
     });
   });
 });

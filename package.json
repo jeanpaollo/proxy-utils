@@ -1,17 +1,19 @@
 {
   "name": "@jeanpaollo/proxy-utils",
-  "version": "1.0.0",
+  "version": "1.1.2",
   "description": "A package to offer common proxy benefits",
-  "scripts": {
-    "test": "jest"
-  },
-  "pre-push": [
-    "test"
-  ],
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
     "/dist"
+  ],
+  "scripts": {
+    "compile": "npx tsc",
+    "test": "jest",
+    "prepublishOnly": "npm test && npm run compile"
+  },
+  "pre-push": [
+    "prepublishOnly"
   ],
   "repository": {
     "type": "git",
@@ -36,6 +38,7 @@
   },
   "dependencies": {
     "@jeanpaollo/boolean-utils": "^1.0.0",
+    "@jeanpaollo/proxy-utils": "file:",
     "@types/voca": "^1.4.5",
     "voca": "^1.4.1"
   }
