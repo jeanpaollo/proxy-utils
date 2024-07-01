@@ -1,0 +1,42 @@
+{
+  "name": "@jeanpaollo/proxy-utils",
+  "version": "1.0.0",
+  "description": "A package to offer common proxy benefits",
+  "scripts": {
+    "test": "jest"
+  },
+  "pre-push": [
+    "test"
+  ],
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "/dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jeanpaollo/proxy-utils.git"
+  },
+  "keywords": [
+    "proxy",
+    "utils"
+  ],
+  "author": "Jean Paollo Olimpio Gomes Ferreira",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jeanpaollo/proxy-utils/issues"
+  },
+  "homepage": "https://github.com/jeanpaollo/proxy-utils#readme",
+  "devDependencies": {
+    "@types/jest": "^29.5.12",
+    "jest": "^29.7.0",
+    "pre-push": "^0.1.4",
+    "ts-jest": "^29.1.5",
+    "typescript": "^5.5.2"
+  },
+  "dependencies": {
+    "@jeanpaollo/boolean-utils": "^1.0.0",
+    "@types/voca": "^1.4.5",
+    "voca": "^1.4.1"
+  }
+}
